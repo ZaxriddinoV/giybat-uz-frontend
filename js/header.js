@@ -42,11 +42,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     //Show profile menu on header
-    const userDetailStr = localStorage.getItem("userDetail");
+    const userDetailStr = Config.userInfo;
     if (userDetailStr === null || userDetailStr === undefined) {
         return;
     }
-    const userDetail = JSON.parse(userDetailStr);
+    const userDetail = userDetailStr;
     const userName = userDetail.name;
 
     const loginBtn = document.getElementById("header_btn");
