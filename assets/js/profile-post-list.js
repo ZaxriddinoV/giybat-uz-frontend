@@ -1,9 +1,9 @@
-import { POSTS_REQS } from "./api/posts.js";
+import { PROFILE_REQS } from "./api/profile.js";
 import { PaginationList } from "./components/pagination-list.js";
 
-document.addEventListener("DOMContentLoaded", () => {
+window.onload = () => {
   PaginationList.drawPostContainer({
     container: "post-container",
-    apiCall: POSTS_REQS.getAll,
+    apiCall: PROFILE_REQS.getAll,
   });
-});
+};

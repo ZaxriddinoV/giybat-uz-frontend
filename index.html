@@ -29,7 +29,8 @@
                             <input type="text" placeholder="Qidirish" class="header_input" />
                             <button class="header_search"></button>
                         </div>
-                        <div class="dropdown">
+                        <div id="create-btn"></div>
+                        <!-- <div class="dropdown">
                             <div class="dropdown_toggle" onclick="toggleLanguageDropdown()">
                                 <img src="assets/images/language.svg" width="24" height="24" />
                                 <span id="current-lang">UZ</span>
@@ -40,7 +41,7 @@
                                 <div onclick="setSelectedLanguage('EN')">EN</div>
                                 <div onclick="setSelectedLanguage('RU')">RU</div>
                             </div>
-                        </div>
+                        </div> -->
                         <div class="header_btn__box">
                             <div class="header_burger__box">
                                 <i class="header_burger"></i>
@@ -73,7 +74,7 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#logout" onclick="logout()">
+                                        <a href="#" id="logout">
                                             <span class="icon">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                     fill="currentColor" viewBox="0 0 16 16">
@@ -125,7 +126,6 @@
 
         </main>
     </div>
-    <!-- Footerni yuklash uchun div -->
     <footer class="footer">
         <div class="container">
             <div class="footer_container">

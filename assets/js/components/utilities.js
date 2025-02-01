@@ -1,3 +1,4 @@
+import { POSTS_REQS } from "../api/posts.js";
 import { Toastify } from "../lib/toastify/toastify.js";
 
 export class Utilities {
@@ -32,7 +33,10 @@ export class Utilities {
     postBoxElement.classList = "post_box";
 
     const postDetailElement = document.createElement("a");
-    postDetailElement.href = `post-detail.html?id=${id}`;
+    // postDetailElement.href = `post-detail.html?id=${id}`;
+    postDetailElement.onclick = () => {
+      window.location.href = `post-detail.html?id=${id}`;
+    };
 
     const postImgBox = document.createElement("div");
     postImgBox.classList = "post_img__box";
@@ -45,15 +49,70 @@ export class Utilities {
     postTitle.classList = "post_title";
     postTitle.innerText = title;
 
+    const postFooter = document.createElement("div");
+    postFooter.className = "post-card-footer";
+
     const postDate = document.createElement("p");
     postDate.classList = "post_text";
     postDate.innerText = createdDate;
+
+    const postAction = document.createElement("div");
+    postAction.className = "post-card-action";
+
+    if (String(User.userInfo?.id) === String(data?.user?.id)) {
+      const editBtn = document.createElement("button");
+      editBtn.type = "button";
+      editBtn.className = "edit-btn";
+      editBtn.innerHTML = `
+      <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#ffffff"><path d="M216-216h51l375-375-51-51-375 375v51Zm-72 72v-153l498-498q11-11 23.84-16 12.83-5 27-5 14.16 0 27.16 5t24 16l51 51q11 11 16 24t5 26.54q0 14.45-5.02 27.54T795-642L297-144H144Zm600-549-51-51 51 51Zm-127.95 76.95L591-642l51 51-25.95-25.05Z"/></svg>
+    `;
+
+      const deleteBtn = document.createElement("button");
+      deleteBtn.type = "button";
+      deleteBtn.className = "delete-btn";
+      deleteBtn.innerHTML = `
+    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="#ffffff"><path d="M312-144q-29.7 0-50.85-21.15Q240-186.3 240-216v-480h-48v-72h192v-48h192v48h192v72h-48v479.57Q720-186 698.85-165T648-144H312Zm336-552H312v480h336v-480ZM384-288h72v-336h-72v336Zm120 0h72v-336h-72v336ZM312-696v480-480Z"/></svg>
+    `;
+
+      editBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        window.location.href = `post-update.html?id=${id}`;
+      });
+
+      deleteBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+
+        const isConfirmed = window.confirm(
+          "Haqiqatan ham ushbu postni o‘chirmoqchimisiz?"
+        );
+
+        if (isConfirmed) {
+          Loader.button(true);
+          POSTS_REQS.delete(
+            id,
+            () => {
+              Loader.button(false);
+              alert("Muvaffaqiyatli o'chirildi!");
+              window.location.href = "./profile-post-list.html";
+            },
+            () => {
+              Loader.button(false);
+            }
+          );
+        }
+      });
+
+      postAction.appendChild(editBtn);
+      postAction.appendChild(deleteBtn);
+    }
+    postFooter.appendChild(postDate);
+    postFooter.appendChild(postAction);
 
     postImgBox.appendChild(img);
 
     postDetailElement.appendChild(postImgBox);
     postDetailElement.appendChild(postTitle);
-    postDetailElement.appendChild(postDate);
+    postDetailElement.appendChild(postFooter);
 
     postBoxElement.appendChild(postDetailElement);
 
@@ -101,11 +160,13 @@ export class User {
     localStorage.setItem("token", jwtToken);
   }
 
-  static set userInfo({ name, surname, role, username }) {
+  static set userInfo({ name, surname, role, username, id }) {
     const userData = {
       name,
       username,
       surname,
+      role,
+      id,
     };
     localStorage.setItem("userInfo", JSON.stringify(userData));
   }
@@ -140,3 +201,10 @@ export class Loader {
     }
   }
 }
+
+export const REQUEST = {
+  getParameter(param) {
+    let urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get(param) || undefined;
+  },
+};

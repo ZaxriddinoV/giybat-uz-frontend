@@ -24,9 +24,10 @@ export const POSTS_REQS = {
   },
   create(data, onSuccess, onError) {
     request.post({
-      url: `/api/post`,
+      url: `/api/post/`,
       data: data,
       onSuccess: onSuccess,
+      isMultipart: true,
       onError: (error) => {
         if (typeof onError === "function") onError(error);
         Toast.errorToast(error);
@@ -38,6 +39,7 @@ export const POSTS_REQS = {
       url: `/api/post/${id}`,
       data: data,
       onSuccess: onSuccess,
+      isMultipart: true,
       onError: (error) => {
         if (typeof onError === "function") onError(error);
         Toast.errorToast(error);
