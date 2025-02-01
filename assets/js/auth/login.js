@@ -1,6 +1,5 @@
 import { AUTH_REQS } from "../api/auth.js";
 import { Loader, Toast, User, Utilities } from "../components/utilities.js";
-import { Layouts } from "../layouts.js";
 
 class Login {
   static getRequestJson() {
@@ -23,7 +22,6 @@ class Login {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-  Layouts.init();
   document.getElementById("loginBtn").addEventListener("click", (event) => {
     event.preventDefault();
     Login.getRequestJson();

@@ -209,6 +209,14 @@
   /* display: none; */
 }
 
+.header-create-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px !important;
+  padding: 10px 30px; 
+  cursor: pointer !important;
+}
+
 /* Menu start */
 .header_entrance {
   position: relative;
