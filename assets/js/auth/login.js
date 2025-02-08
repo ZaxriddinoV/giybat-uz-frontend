@@ -8,7 +8,7 @@ class Login {
     AUTH_REQS.login(
       data,
       (response) => {
-        Toast.successToast("Muvaffaqiyatli kirdingiz!");
+        // Toast.successToast("Muvaffaqiyatli kirdingiz!");
         User.token = response?.data?.jwtToken;
         User.userInfo = response?.data;
         Loader.button(false);

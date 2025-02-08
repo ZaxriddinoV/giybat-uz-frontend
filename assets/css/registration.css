@@ -110,3 +110,36 @@
     line-height: 19.2px;
     text-align: center;
 }
+
+
+.container.check-register{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    padding: 100px 0;
+    gap: 6px;
+}
+
+.container.check-register svg{
+    display: inline-flex;
+    align-items: center;
+    color: inherit;
+    font-style: normal;
+    line-height: 0;
+    text-align: center;
+    text-transform: none;
+    vertical-align: -0.125em;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    font-size: 64px;
+}
+
+.container.check-register h2{
+    line-height: 32px;
+    font-size: 24px;
+}
+
+main .check-register{
+    height: calc(100vh - 104px - 150px);
+}
