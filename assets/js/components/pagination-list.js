@@ -26,16 +26,21 @@ export class PaginationList {
       page: PaginationList.currentPage,
       size: PaginationList.pageSize,
       onSuccess: (res) => {
-        res?.data?.posts.forEach((data) => {
-          const postBox = Utilities.postBox(data);
-          PaginationList.container.appendChild(postBox);
-
-          PaginationList.totalPages = res?.data?.totalPages;
-          PaginationList.currentPage = res?.data?.currentPage;
-          PaginationList.pageSize = res?.data?.pageSize;
-        });
         Loader.button(false);
-        PaginationList.updatePagination();
+        if (res?.data.posts?.length > 0) {
+          res?.data?.posts.forEach((data) => {
+            const postBox = Utilities.postBox(data);
+            PaginationList.container.appendChild(postBox);
+
+            PaginationList.totalPages = res?.data?.totalPages;
+            PaginationList.currentPage = res?.data?.currentPage;
+            PaginationList.pageSize = res?.data?.pageSize;
+          });
+          PaginationList.updatePagination();
+        } else {
+          PaginationList.container.classList.remove("post_container");
+          PaginationList.container.appendChild(Utilities.notFoundData());
+        }
       },
       onError: () => {
         Loader.button(false);
